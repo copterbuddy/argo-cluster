@@ -98,7 +98,7 @@ spec:
     - host: localhost
       http:
         paths:
-          - path: /
+          - path: /blazor-service
             pathType: ImplementationSpecific
         backend:
           service:
