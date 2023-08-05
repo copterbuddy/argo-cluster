@@ -30,7 +30,7 @@ spec:
           name: blazor-service
           imagePullPolicy: Always
           ports:
-            - containerPort: 80
+            - containerPort: 5297
           resources:
             requests:
               memory: "256Mi"
@@ -40,8 +40,8 @@ spec:
               cpu: "500m"
           livenessProbe:
             httpGet:
-              path: /myconf
-              port: 80
+              path: /User/Greeting
+              port: 5297
             initialDelaySeconds: 20
             periodSeconds: 10
           env:
