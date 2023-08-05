@@ -8,6 +8,8 @@ spec:
   source:
     repoURL: https://github.com/copterbuddy/argo-cluster.git
     targetRevision: HEAD
+    directory:
+      recurse: true
     path: argo-config/dev
   destination:
     server: https://kubernetes.default.svc
