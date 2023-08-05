@@ -77,11 +77,12 @@ metadata:
   labels:
     app: blazor-service
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - port: 81
       targetPort: 81
       protocol: TCP
+      targetPort: 50001
   selector:
     app: blazor-service
 ---
