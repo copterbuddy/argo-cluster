@@ -98,13 +98,13 @@ spec:
     - host: localhost
       http:
         paths:
-          - path: /blazor-service
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: blazor-service
-                port:
-                  number: 81
+        - path: /blazor-service
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: blazor-service
+              port:
+                number: 81
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
