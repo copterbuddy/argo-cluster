@@ -39,11 +39,29 @@ spec:
             initialDelaySeconds: 20
             periodSeconds: 10
           env:
-            - name: APP_ENV
+            - name: ASPNETCORE_ENVIRONMENT
               valueFrom:
                 secretKeyRef:
-                  name: goviper
-                  key: app_env
+                  name: blazor-service
+                  key: ASPNETCORE_ENVIRONMENT
+
+            - name: Jwt__Issuer
+              valueFrom:
+                secretKeyRef:
+                  name: blazor-service
+                  key: Jwt__Issuer
+
+            - name: Jwt__Key
+              valueFrom:
+                secretKeyRef:
+                  name: blazor-service
+                  key: Jwt__Key
+
+            - name: Jwt__Audience
+              valueFrom:
+                secretKeyRef:
+                  name: blazor-service
+                  key: Jwt__Audience
 ---
 apiVersion: v1
 kind: Service
