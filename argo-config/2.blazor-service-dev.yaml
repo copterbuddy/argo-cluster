@@ -14,3 +14,11 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: blazor-service
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+
+    autometed:
+      selfHeal: true
+      prune: true
