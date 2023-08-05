@@ -77,13 +77,27 @@ metadata:
   labels:
     app: blazor-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 81
       targetPort: 81
       protocol: TCP
   selector:
     app: blazor-service
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: blazor-ingress
+  namespace: blazor-service
+spec:
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - backend:
+              serviceName: blazor-service
+              servicePort: 81
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
