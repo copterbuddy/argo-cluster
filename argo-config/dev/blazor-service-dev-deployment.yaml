@@ -89,15 +89,19 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: blazor-ingress
-  namespace: blazor-service
+  # namespace: blazor-service
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
     - host: localhost
       http:
         paths:
-          - backend:
-              serviceName: blazor-service
-              servicePort: 81
+          - path: /
+            pathType: Prefix
+        backend:
+          serviceName: blazor-service
+          servicePort: 81
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
