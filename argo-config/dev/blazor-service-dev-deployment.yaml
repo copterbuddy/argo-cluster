@@ -100,11 +100,11 @@ spec:
         paths:
           - path: /blazor-service
             pathType: ImplementationSpecific
-        backend:
-          service:
-            name: blazor-service
-            port:
-              number: 81
+            backend:
+              service:
+                name: blazor-service
+                port:
+                  number: 81
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
