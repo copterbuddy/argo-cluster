@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blazor-service
+  namespace: blazor-service
+  labels:
+    customer: blazor-customer
+    environment: development
+    app: blazor-service
+spec:
+  selector:
+    matchLabels:
+      app: blazor-service
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: blazor-service
+    spec:
+      containers:
+        - image: copterbuddy/blazorservicedev
+          name: blazor-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "300m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /myconf
+              port: 80
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          env:
+            - name: APP_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: goviper
+                  key: app_env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blazor-service
+  namespace: blazor-service
+  labels:
+    app: blazor-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+  selector:
+    app: blazor-service
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: blazor-service
+  namespace: blazor-service
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: blazor-service
+  minReplicas: 2
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
