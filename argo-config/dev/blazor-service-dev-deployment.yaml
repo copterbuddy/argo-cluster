@@ -74,7 +74,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 80
-      targetPort: 5297
+      targetPort: 80
       protocol: TCP
   selector:
     app: blazor-service
