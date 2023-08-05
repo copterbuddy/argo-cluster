@@ -71,9 +71,11 @@ metadata:
   labels:
     app: blazor-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   ports:
     - port: 80
+      targetPort: 5297
+      protocol: TCP
   selector:
     app: blazor-service
 ---
