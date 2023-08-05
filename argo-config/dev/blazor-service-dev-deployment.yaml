@@ -94,7 +94,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
 spec:
   rules:
-    - host: localhost
+    - host: localhost:81
       http:
         paths:
         - path: /blazor-service
