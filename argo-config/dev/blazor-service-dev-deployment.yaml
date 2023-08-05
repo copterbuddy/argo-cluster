@@ -99,7 +99,7 @@ spec:
       http:
         paths:
         - path: /blazor-service
-          pathType: ImplementationSpecific
+          pathType: Prefix
           backend:
             service:
               name: blazor-service
